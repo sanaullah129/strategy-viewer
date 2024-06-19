@@ -6,7 +6,7 @@ import { dateArray, strategyArray } from './utils/data';
 import './App.css'
 
 const App: React.FC = () => {
-  const [selectedView, setSelectedView] = useState<string>('Bullish');
+  const [selectedView, setSelectedView] = useState<string>('Bearish');
   const [selectedDate, setSelectedDate] = useState(dateArray[0]);
 
   const strategies = strategyArray.find((item) => item.View === selectedView)?.Value || {};

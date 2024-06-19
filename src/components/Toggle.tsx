@@ -5,7 +5,7 @@ interface ToggleProps {
   onChange: (view: string) => void;
 }
 
-const views = ['Bullish', 'Bearish', 'RangeBound', 'Volatile'];
+const views = ['Bullish', 'Bearish', 'Rangebound', 'Volatile'];
 
 const Toggle: React.FC<ToggleProps> = ({ selectedView, onChange }) => {
   return (
