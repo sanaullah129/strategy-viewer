@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Toggle from './components/Toggle';
+import DateDropdown from './components/DateDropdown';
+import StrategyCards from './components/StrategyCards';
+import { dateArray, strategyArray } from './utils/data';
+import './App.css'
 
-function App() {
+const App: React.FC = () => {
+  const [selectedView, setSelectedView] = useState<string>('Bullish');
+  const [selectedDate, setSelectedDate] = useState(dateArray[0]);
+
+  const strategies = strategyArray.find((item) => item.View === selectedView)?.Value || {};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Toggle selectedView={selectedView} onChange={setSelectedView} />
+      <DateDropdown dates={dateArray} selectedDate={selectedDate} onChange={setSelectedDate} />
+      <StrategyCards strategies={strategies} selectedDate={selectedDate} />
     </div>
   );
-}
+};
 
 export default App;
