@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface DateDropdownProps {
   dates: string[];
@@ -7,15 +7,28 @@ interface DateDropdownProps {
 }
 
 const DateDropdown: React.FC<DateDropdownProps> = ({ dates, selectedDate, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelect = (date: string) => {
+    onChange(date);
+    setIsOpen(false);
+  };
+
   return (
-    <div className="select-wrapper">
-      <select value={selectedDate} onChange={(e) => onChange(e.target.value)}>
-        {dates.map((date) => (
-          <option key={date} value={date}>
-            {date}
-          </option>
-        ))}
-      </select>
+    <div className="dropdown">
+      <div className="selected" onClick={() => setIsOpen(!isOpen)}>
+        {selectedDate}
+        <span className="arrow">{isOpen ? '▲' : '▼'}</span>
+      </div>
+      {isOpen && (
+        <div className="options">
+          {dates.map((date) => (
+            <div key={date} className="option" onClick={() => handleSelect(date)}>
+              {date}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
